@@ -19,8 +19,30 @@ function calculate() {
         display.value = 'Error';
     }
 }
-// Clear last input
 
-function clearLastInput(value) {
+// Clear last input
+function clearLastInput() {
     display.value = display.value.slice(0, -1);
 }
+
+// Function to handle keyboard input
+function handleKeyPress(event) {
+    const key = event.key;
+
+    if (key >= '0' && key <= '9') {
+        appendToDisplay(key);
+    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        appendToDisplay(key);
+    } else if (key === '.' && display.value.indexOf('.') === -1) {
+        appendToDisplay(key);
+    } else if (key === 'Enter' || key === '=') {
+        calculate();
+    } else if (key === 'Escape') {
+        clearDisplay();
+    } else if (key === 'Backspace') {
+        clearLastInput();
+    }
+}
+
+// Event listener for keyboard input
+document.addEventListener('keydown', handleKeyPress);
